@@ -1,0 +1,90 @@
+<div class="row">
+  <div class="col-md-6">
+          <div id="header"><h2>Moblie Store Data Application</h2></div>
+          <div id="wrapper">
+              <form (ngSubmit)="onSubmit(f)" #f="ngForm">
+            <div id="form-data">
+            <div class="form-group" [class.has-error]="name.invalid && name.touched" 
+            [class.has-success]="name.valid">
+                <label for="storeName" class="control-label">Store Name</label>
+                <input id="storeName" type="text" class="form-control" ngModel name="storeName" required #name="ngModel">
+                <span class="help-block" *ngIf="name.invalid && name.touched">Please enter the Store Name</span>
+                
+            </div>
+            
+            <div class="form-group" [class.has-error]="email.invalid && email.touched"
+            [class.has-success]="email.valid">
+                <label for="storeEmailId" class="control-label">Store Email Id</label>
+                <input  id= "storeEmailId"  type="email" class="form-control" ngModel name="storeEmailId" required email #email="ngModel">
+                <span class="help-block" *ngIf="email.invalid && email.touched">Please enter a valid email</span>
+            </div>
+            <div class="form-group" [class.has-error]="des.invalid && des.touched"
+            [class.has-success]="des.valid">
+                <label for="storeDescription" class="control-label">Store Description</label>
+                <input id="storeDescription" type="text" class="form-control" ngModel name="storeDescription" required #des="ngModel">
+                <span class="help-block" *ngIf="des.invalid && des.touched">Please enter the Store Description</span>
+              </div>
+            <div class="form-group" [class.has-error]="search.invalid && search.touched"
+            [class.has-success]="search.valid">
+                <label for="location" class="control-label">Location</label>
+                <!--<input id="location" type="text" class="form-control" ngModel name="location" required #loc="ngModel">-->
+                <input placeholder="search for location"
+                autocorrect="off" autocapitalize="off" 
+               spellcheck="off" type="text" class="form-control" ngModel
+               name="location" required 
+               #search [formControl]="searchControl"
+               id="location"
+              >
+               
+                <span class="help-block" *ngIf="search.invalid && search.touched">Please enter the Location</span>
+            </div>
+            </div>
+
+            <div class="form-group">
+                <label for="Available things in store">Available things in store</label><br>
+                <ul>
+                <li><input type="checkbox" class="form-control">Mobile SIM cards</li>
+                <li class="checkbox"><input type="checkbox" class="form-control">Recharge Cards</li>
+                <li class="checkbox"><input type="checkbox" class="form-control">Mobile Repair Services</li>
+                <li class="checkbox"><input type="checkbox" class="form-control">Mobile Accessories</li>
+              </ul>
+            </div> 
+          
+            <button class="btn btn-primary" type="submit"  [disabled]="!f.valid">Submit</button> 
+          
+          </form>
+          <agm-map [latitude]="latitude" [longitude]="longitude" [scrollwheel]="false" [zoom]="zoom">
+            <agm-marker [latitude]="latitude" [longitude]="longitude"></agm-marker>
+          </agm-map>
+          </div>
+      </div>
+    
+  <div class="col-md-6" *ngIf="submitted">
+          <div class="col-xs-12">
+                  <div style="overflow-x:auto;">
+
+                  <h2> Mobile Store Form Data: </h2>
+
+                  
+                  <table style="width:100%">
+                          <tr>
+                            <th>Store Name</th>
+                            <td>{{user.storeName}}</td>
+                          </tr>
+                          <tr>
+                            <th>Store Email Id</th>
+                            <td>{{ user.storeEmail }}</td>
+                          </tr>
+                          <tr>
+                            <th>Store Description</th>
+                            <td>{{user.storeDescription | myuppercase}}</td>
+                          </tr>
+                          <tr>
+                              <th>Location</th>
+                              <td>{{user.location}}</td>
+                           </tr>
+                        </table>                                     
+          </div>
+  </div>
+</div>
+  
